@@ -4,32 +4,26 @@
 namespace oiran\walletlib\repository;
 
 
-use oiran\walletlib\dto\WalletDTO;
 use oiran\walletlib\model\Wallet;
-use oiran\walletlib\usecase\OutputWalletDataUseCase;
 
+//Storeからのみアクセスするようにする
 class WalletRepository
 {
-	private array $decodeWalletMap;
+    public function __construct() { }
 
-	public function __construct() {
-		$this->decodeWalletMap = OutputWalletDataUseCase::execute();
-	}
+    public function isExist($xuid): bool {
+        //todo : ぞんざい確認
+    }
 
-	public function push(Wallet $wallet) {
-		$this->decodeWalletMap[$wallet->getOwnerXuid()] = $wallet;
-	}
+    public function save(Wallet $wallet) {
+        //todo : 永久化
+    }
 
-	public function delete(string $xuid) {
-		unset($this->decodeWalletMap[$xuid]);
-	}
+    public function get(string $xuid): Wallet {
+        //todo : get
+    }
 
-	public function findBy(string $xuid): ?Wallet {
-		$data = $this->decodeWalletMap[$xuid];
-		return $data === null ? null : WalletDTO::decode($xuid, $data);
-	}
-
-	public function getDecodeWalletMap(): array {
-		return $this->decodeWalletMap;
-	}
+    public function delete(Wallet $wallet) {
+        //todo : ファイルごと削除。 xuidだけ受け取るのでも良い
+    }
 }

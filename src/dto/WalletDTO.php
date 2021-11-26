@@ -8,14 +8,16 @@ use oiran\walletlib\model\Wallet;
 
 class WalletDTO
 {
-	public static function decode(string $xuid, array $data): Wallet {
-		return new Wallet($xuid, $data["ownerName"], $data["moneyAmount"]);
+    //todo jsonのkeyはスネークケースが一般的な気がする
+	public static function decode(array $data): Wallet {
+		return new Wallet($data["xuid"], $data["owner_name"], $data["money_amount"]);
 	}
 
 	public static function encode(Wallet $wallet): array {
 		return [
-			"moneyAmount" => $wallet->getMoney(),
-			"ownerName" => $wallet->getOwnerName()
+            "xuid" => $wallet->getOwnerXuid(),
+			"money_amount" => $wallet->getMoney(),
+			"owner_name" => $wallet->getOwnerName()
 		];
 	}
 }

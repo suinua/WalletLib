@@ -3,7 +3,7 @@
 
 namespace oiran\walletlib\model;
 
-
+//todo コンフィグでいいのでは？
 class Option
 {
 	private string $fullPath;
